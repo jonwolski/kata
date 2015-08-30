@@ -1,13 +1,12 @@
 module LastDigit where
 
 lastDigit :: Integer -> Integer -> Integer
-lastDigit _ 0 = 1
-lastDigit 0 _ = 0
-lastDigit a b = unitsDigit $ partialProduct (unitsDigit a) b
+lastDigit b e = iterate (partialProduct b ) 1 !! fromIntegral e
 
 partialProduct :: Integer -> Integer -> Integer
-partialProduct a 0 = 1
-partialProduct a b = unitsDigit $ a * (partialProduct a (b-1))
+partialProduct n = unitsDigit . (* n)
 
 unitsDigit :: Integer -> Integer
-unitsDigit n = snd $ quotRem n 10
+unitsDigit = flip mod 10
+
+
