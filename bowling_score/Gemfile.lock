@@ -15,9 +15,11 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    state_machine (1.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rspec
+  state_machine
