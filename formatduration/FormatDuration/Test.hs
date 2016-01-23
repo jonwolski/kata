@@ -4,12 +4,20 @@ import Test.Hspec
 
 main = hspec $
   describe "formatDuration" $ do
-    it "should work for some basic tests" $ do
+    it "returns 'now' for 0" $ do
       formatDuration 0 `shouldBe` "now"
+
+    it "formats simple values" $ do
       formatDuration 1 `shouldBe` "1 second"
-      formatDuration 62 `shouldBe` "1 minute and 2 seconds"
-      formatDuration 120 `shouldBe` "2 minutes"
       formatDuration 3600 `shouldBe` "1 hour"
+
+    it "pluralizes units" $ do
+      formatDuration 120 `shouldBe` "2 minutes"
+
+    it "combines simple units with 'and'" $ do
+      formatDuration 62 `shouldBe` "1 minute and 2 seconds"
+
+    it "combines simple units with 'and' and commas" $ do
       formatDuration 3662 `shouldBe` "1 hour, 1 minute and 2 seconds"
       formatDuration 15731080 `shouldBe` "182 days, 1 hour, 44 minutes and 40 seconds"
       formatDuration 132030240 `shouldBe` "4 years, 68 days, 3 hours and 4 minutes"
