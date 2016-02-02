@@ -32,11 +32,16 @@ cols :: [[a]] -> [[a]]
 cols = transpose
 
 diags :: [[a]] -> [[a]]
-diags = error "implement diags"
+diags grid = [[grid !! (i+k) !! (j+k) | k<-[0..3]] | i <- [0..15], j <- [0..15]]
+
+reverseDiags :: [[a]] -> [[a]]
+reverseDiags = diags . (map reverse)
+
 
 productsOfQuartets :: (Num a) => [a] -> [a]
 productsOfQuartets xxs@(_:xs) = (product $ take 4 xxs):productsOfQuartets xs
 productsOfQuartets x = x
 
 maximumValue :: Int
-maximumValue = maximum $ concat $ map productsOfQuartets $ rows grid ++ cols grid
+maximumValue = maximum $ concat $ map productsOfQuartets $ rows grid ++ cols grid ++ diags grid ++ reverseDiags grid
+
