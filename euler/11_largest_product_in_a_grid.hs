@@ -45,3 +45,4 @@ productsOfQuartets x = x
 maximumValue :: Int
 maximumValue = maximum $ concat $ map productsOfQuartets $ rows grid ++ cols grid ++ diags grid ++ reverseDiags grid
 
+main = putStrLn $ show $ maximumValue
