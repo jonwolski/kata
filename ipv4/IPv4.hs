@@ -17,4 +17,4 @@ ensurePositive a
 
 int32ToBytesIter :: Integral a => (a,a) -> [a] -> [a]
 int32ToBytesIter ( 0, 0) ns = ns
-int32ToBytesIter ( q, r) ns = int32ToBytesIter (quotRem (ensurePositive q) 0x10) (r:ns)
+int32ToBytesIter ( q, r) ns = int32ToBytesIter (quotRem (ensurePositive q) 0x100) (r:ns)
