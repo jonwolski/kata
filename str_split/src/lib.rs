@@ -19,12 +19,9 @@ impl<'a> Iterator for StrSplit<'a, '_> {
         let remainder = self.remainder.as_ref()?;
 
         if let Some(position) = remainder.find(self.delimiter) {
-            let item = &remainder[..position];
+            let item = Some(&remainder[..position]);
             self.remainder = Some(&remainder[(position + self.delimiter.len())..]);
-            if item.len() == 0 {
-                return self.next();
-            }
-            Some(item)
+            item.filter(|r| r.len() > 0).or_else(|| self.next())
         } else {
             if remainder.len() == 0 {
                 return None;
